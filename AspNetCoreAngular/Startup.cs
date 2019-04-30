@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AspNetCoreAngular.Data;
+using AspNetCoreAngular.Interface;
+using AspNetCoreAngular.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,9 @@ namespace AspNetCoreAngular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //  Repositories
+            services.AddTransient<IAuthRepository, AuthRepository>();
+
             services.AddDbContext<AspNetCoreAngularContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
             
             services.AddCors();
