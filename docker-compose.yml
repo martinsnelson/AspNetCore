@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  sqlserve: 
+    image: microsoft/mssql-server-linux:2017-latest
+    container_name: sqlserve
+    ports:
+      - "1433:1433"
+    networks:
+      - desafio
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: M1nhaS&nha!
+
+networks:
+  desafio:
+    driver: bridge

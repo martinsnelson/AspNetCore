@@ -1,9 +1,12 @@
+using System.Threading.Tasks;
+using AspNetCoreAngular.Entities;
+
 namespace AspNetCoreAngular.Interface
 {
     public interface IAuthRepository
     {
-        //Task<TblUser> Register(TblUser user, string password);
-        //Task<TblUser> Login(string username, string password);
-        //Task<bool> UserExists(string username);
+        Task<Usuario> Registrar(Usuario usuario, string senha);
+        Task<Usuario> Login(string usuarioNome, string senha);
+        Task<bool> UsuarioExiste(string usuarioNome);
     }
 }
