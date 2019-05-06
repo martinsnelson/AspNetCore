@@ -11,7 +11,9 @@ import { Produto } from './produto';
 })
 export class ProdutoComponent implements OnInit {
 
-  dados: Produto[] = [];
+  dados: Produto[] = [
+    
+  ];
   exibirColunas: string[] = ['produtoID', 'nome', 'descricao'];
   carregandoResult = true;
 

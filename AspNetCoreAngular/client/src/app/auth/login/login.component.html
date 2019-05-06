@@ -1,3 +1,28 @@
-<p>
-  login works!
-</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="carregandoResult">
+    <div> *ngIf="carregandoResult"></div>
+  </div>
+  <div class="example-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
+      <div class="example-full-width">
+        <input type="email" placeholder="Email" formControlName="email">
+        <div>
+          <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">Please enter your email</span>
+        </div>
+      </div>
+      <div class="example-full-width">
+        <input type="password" placeholder="Senha" formControlName="senha">
+        <div>
+          <span *ngIf="!loginForm.get('senha').valid && loginForm.get('senha').touched">Please enter your password</span>
+        </div>
+      </div>
+      <div class="button-row">
+        <button type="submit" [disabled]="!loginForm.valid"  color="primary">Login</button>
+      </div>
+      <div class="button-row">
+        <button type="button"  color="primary" (click)="registrar()">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
