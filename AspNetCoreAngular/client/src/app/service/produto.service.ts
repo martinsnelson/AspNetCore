@@ -11,7 +11,9 @@ export class ProdutoService {
 
   apiUrl = 'http://localhost:5000/v1/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+  }
 
   obterProdutos(): Observable<Produto[]> {
     return this.http.get<Produto[]>(this.apiUrl + 'produto')

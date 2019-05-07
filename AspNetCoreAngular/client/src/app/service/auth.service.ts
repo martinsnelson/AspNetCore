@@ -11,7 +11,6 @@ export class AuthService {
   apiUrl = 'http://localhost:5000/v1/api/auth/';
 
   constructor(private http: HttpClient) { 
-
   }
 
   login(data: any): Observable<any> {

@@ -27,6 +27,7 @@ namespace AspNetCoreAngular
         {
             Configuration = configuration;
         }
+        private readonly string CorsOrigins = "_CorsOrigins";
 
         public IConfiguration Configuration { get; }
 
@@ -37,8 +38,21 @@ namespace AspNetCoreAngular
             services.AddTransient<IAuthRepository, AuthRepository>();
 
             services.AddDbContext<AspNetCoreAngularContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
-            
-            services.AddCors();
+
+            services.AddCors(options  =>
+            {
+                options.AddPolicy(CorsOrigins, 
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod()
+                                        .AllowAnyOrigin()
+                                        .AllowCredentials();
+                                     
+                    //.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                });
+            });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
@@ -70,7 +84,9 @@ namespace AspNetCoreAngular
                 app.UseHsts();
             }
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            // app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            app.UseCors(CorsOrigins);
+
             app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();

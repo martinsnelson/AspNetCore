@@ -1,18 +1,18 @@
- <div class="example-container mat-elevation-z8">
+  <div class="example-container mat-elevation-z8">
   <div class="example-loading-shade"
        *ngIf="carregandoResult">
     <div *ngIf="carregandoResult">
   </div>
-  </div>
+  </div> 
   <div class="button-row">
     <a href="#" color="primary" (click)="logout()">Logout</a>
   </div>
    <div class="mat-elevation-z8">
    <table mdbTable>
       <thead class="black white-text">
-      <tr>
+      <!-- <tr>
        <th *ngFor="let head of dados" scope="col">{{head}} </th>
-    </tr>
+    </tr> -->
     </thead>
      <tbody>
     <tr mdbTableCol *ngFor="let dado of dados">
