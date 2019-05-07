@@ -5,21 +5,32 @@
   </div>
   </div> 
   <div class="button-row">
-    <a href="#" color="primary" (click)="logout()">Logout</a>
+    <a href="/" color="primary" (click)="logout()">Logout</a>
   </div>
    <div class="mat-elevation-z8">
    <table mdbTable>
       <thead class="black white-text">
+        <th>Categoria</th>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Fornecedor</th>
+        <th>Preço</th>
+        <th>Data Validade</th>
       <!-- <tr>
        <th *ngFor="let head of dados" scope="col">{{head}} </th>
     </tr> -->
     </thead>
      <tbody>
     <tr mdbTableCol *ngFor="let dado of dados">
-      <th scope="row">{{dado.produtoID}}</th>
+      <!-- <th scope="row">{{dado.produtoID}}</th> -->
+      <td>{{dado.categoria}}</td>
       <td>{{dado.produtoID}}</td>
       <td>{{dado.nome}}</td>
       <td>{{dado.descricao}}</td>
+      <td>{{dado.fornecedor}}</td>
+      <td>{{dado.preco}}</td>
+      <td>{{dado.dataValidade}}</td>      
     </tr>
   </tbody>
 </table>

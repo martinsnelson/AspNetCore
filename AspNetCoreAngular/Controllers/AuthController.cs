@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AspNetCoreAngular.DTO;
 using AspNetCoreAngular.Entities;
-using AspNetCoreAngular.Interface;
+using AspNetCoreAngular.Interface.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using AspNetCoreAngular.Entities;
 
-namespace AspNetCoreAngular.Interface
+namespace AspNetCoreAngular.Interface.Repositories
 {
     public interface IAuthRepository
     {

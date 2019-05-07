@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using AspNetCoreAngular.Data;
+using AspNetCoreAngular.Interface.Repositories;
 using AspNetCoreAngular.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,29 +14,29 @@ namespace AspNetCoreAngular.Controllers
     [ApiController]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoRepository _repo;
+        //private readonly AspNetCoreAngularContext _context;
+        private readonly IProdutoRepository _repo;
         private readonly IMapper _mapper;
-        private readonly AspNetCoreAngularContext _context;
-        public ProdutoController(ProdutoRepository repo, AspNetCoreAngularContext context)
+        public ProdutoController(IProdutoRepository repo, IMapper mapper)
         {
             _repo = repo;
-            _context = context;
+            _mapper = mapper;
         }
 
-        [EnableCors("AllowSpecificOrigin")]
+        // [EnableCors("AllowSpecificOrigin")]
+        // [HttpGet]
+        // public async Task<IActionResult> ObterProdutos()
+        // {
+        //     var dados = await _context.Produtos.ToListAsync();
+        //     return Ok(dados);
+        // }
+
+        //[EnableCors]
         [HttpGet]
         public async Task<IActionResult> ObterProdutos()
         {
-            var dados = await _context.Produtos.ToListAsync();
+            var dados = await _repo.ObterProdutos();
             return Ok(dados);
         }
-
-        //[EnableCors]
-        //[HttpGet]
-        // public IActionResult ObterProdutos()
-        // {
-        //     var dados = _repo.ObterProdutos();
-        //     return Ok(dados);
-        // }
     }
 }

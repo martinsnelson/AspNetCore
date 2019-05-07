@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using AspNetCoreAngular.Data;
 using AspNetCoreAngular.Entities;
-using AspNetCoreAngular.Interface;
+using AspNetCoreAngular.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreAngular.Repositories

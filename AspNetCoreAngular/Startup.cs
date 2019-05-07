@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AspNetCoreAngular.Data;
-using AspNetCoreAngular.Interface;
+using AspNetCoreAngular.Interface.Repositories;
 using AspNetCoreAngular.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,25 +34,27 @@ namespace AspNetCoreAngular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //  Context
+            services.AddDbContext<AspNetCoreAngularContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
             //  Repositories
             services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();            
 
-            services.AddDbContext<AspNetCoreAngularContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
-
-            services.AddCors(options  =>
-            {
-                options.AddPolicy(CorsOrigins, 
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200")
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod()
-                                        .AllowAnyOrigin()
-                                        .AllowCredentials();
+            services.AddCors();
+            // services.AddCors(options  =>
+            // {
+            //     options.AddPolicy(CorsOrigins, 
+            //     builder =>
+            //     {
+            //         builder.WithOrigins("http://localhost:4200")
+            //                             .AllowAnyHeader()
+            //                             .AllowAnyMethod()
+            //                             .AllowAnyOrigin()
+            //                             .AllowCredentials();
                                      
-                    //.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
-                });
-            });
+            //         //.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+            //     });
+            // });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
@@ -85,8 +87,9 @@ namespace AspNetCoreAngular
             }
 
             // app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
-            app.UseCors(CorsOrigins);
+            // app.UseCors(CorsOrigins);
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();
