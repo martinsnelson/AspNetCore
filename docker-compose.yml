@@ -4,7 +4,7 @@ services:
 
   sqlserve: 
     image: microsoft/mssql-server-linux:2017-latest
-    container_name: sqlserve
+    container_name: sqlserver
     ports:
       - "1433:1433"
     networks:

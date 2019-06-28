@@ -34,13 +34,15 @@ namespace AspNetCoreAngular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors();
             //  Context
             services.AddDbContext<AspNetCoreAngularContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
             //  Repositories
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();            
 
-            services.AddCors();
             // services.AddCors(options  =>
             // {
             //     options.AddPolicy(CorsOrigins, 
@@ -67,10 +69,7 @@ namespace AspNetCoreAngular
                     ValidateAudience = false
                 };
             });
-
-            services.AddAutoMapper();
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAutoMapper();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,8 +87,11 @@ namespace AspNetCoreAngular
 
             // app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
             // app.UseCors(CorsOrigins);
+            app.UseCors(options => options.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();

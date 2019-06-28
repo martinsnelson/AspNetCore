@@ -1,7 +1,9 @@
 #   ANGULAR
 ng serve --open
 
+
 #   EF
+add package: Microsoft.EntityFrameworkCore.Tools.DotNet
 dotnet ef migrations add Inicial
 dotnet ef database update
 
