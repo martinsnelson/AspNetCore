@@ -28,8 +28,6 @@ namespace AspNetCore.Infra.IoC
             services.AddScoped<ILogger<ActionLogger>, Logger<ActionLogger>>();
             services.AddScoped<ActionLogger>();
 
-            //  Context
-            services.AddDbContext<AspNetCoreContext>(options => options.UseSqlServer(_configuration.GetConnectionString("SQLConnection")));
             //  Repositories
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();            

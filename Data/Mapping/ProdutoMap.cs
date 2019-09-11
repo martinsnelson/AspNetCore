@@ -14,7 +14,8 @@ namespace AspNetCore.Mapping
             builder.Property(x => x.Descricao).HasMaxLength(1024).HasColumnType("varchar(1024)");
             builder.Property(x => x.DataValidade);
             builder.Property(x => x.DataFabricacao);
-            builder.Property(x => x.Preco).IsRequired().HasColumnType("money");
+            builder.Property(x => x.Preco).IsRequired().HasColumnType("decimal");
+            // builder.Property(x => x.Preco).IsRequired();
             builder.HasOne(x => x.Categoria).WithMany(x => x.Produtos);
             builder.HasOne(x => x.Fornecedor).WithMany(x => x.Produtos);
         }

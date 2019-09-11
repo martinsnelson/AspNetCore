@@ -12,7 +12,39 @@ services:
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: M1nhaS&nha!
+    volumes:
+      - ./volumes/sqlserve/:/var/opt/mssql
+      
+  mysql: 
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - desafio
+    environment:
+      MYSQL_DATABASE: 'CbaratoMKDEV'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'cbaratomkDEV'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'M1nhaS&nha!'
+      MYSQL_ROOT_PASSWORD: 'M1nhaS&nha!'
+    volumes:
+      - ./volumes/mysql/:/var/lib/mysql
+      
+  # broker-local:
+  #   image: rabbitmq:3-management-alpine
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     - mensageria
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: "testes"
+  #     RABBITMQ_DEFAULT_PASS: "RabbitMQ2019!"
 
 networks:
   desafio:
     driver: bridge
+  # mensageria:
+  #     driver: bridge

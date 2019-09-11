@@ -1,9 +1,11 @@
-﻿using AspNetCore.Extensions;
+﻿using AspNetCore.Data;
+using AspNetCore.Extensions;
 using AspNetCore.Infra.Logs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,9 +32,15 @@ namespace AspNetCore
             {
                 options.Filters.Add(new ServiceFilterAttribute(typeof(ActionLogger)));
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors();
+            
+            //  Context SQLServe
+            // services.AddDbContext<AspNetCoreContext>(options => options.UseSqlServer(_configuration.GetConnectionString("SQLConnection")));
+            //  Context MySql
+            // services.AddDbContext<AspNetCoreContext>(options => options.UseMySQL(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AspNetCoreContext>(options => options.UseMySql(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -46,6 +54,8 @@ namespace AspNetCore
                     ValidateAudience = false
                 };
             });
+
+            
 
             services.AddDependencyInjection();
 

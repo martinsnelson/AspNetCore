@@ -30,3 +30,9 @@ docker stop $(docker ps -a -q)
 2- "Server=.;Database=BookStore;Trusted_Connection=True;User Id=sa;Password=q;Integrated Security=false;MultipleActiveResultSets=true"
 
 https://rogerdudler.github.io/git-guide/index.pt_BR.html
+
+
+"ConnectionStrings": {
+    "SQLConnection": "Server=.;Database=CbaratoMK;Trusted_Connection=True;User Id=cbaratomk;Password=M1nhaS&nha!;Integrated Security=false;MultipleActiveResultSets=true"
+    // "SQLConnection": "Server=.;Database=DesafioCCAA;Trusted_Connection=True;User Id=sa;Password=M1nhaS&nha!;Integrated Security=false;MultipleActiveResultSets=true"
+  }
