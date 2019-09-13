@@ -11,13 +11,13 @@ stages:
 docker-build:
   stage: build
   script:
-  - docker build -f Dockerfile --iidfile imageid.txt -t registry.heroku.com/cbarato/web .
+  - docker build -f Dockerfile --iidfile imageid.txt -t registry.heroku.com/wacbaratomk/web .
   - docker login -u _ -p $HEROKU_PRODUCTION_API_KEY registry.heroku.com
-  - docker push registry.heroku.com/cbarato/web
+  - docker push registry.heroku.com/wacbaratomk/web
   - apk add --no-cache curl
   - echo "Docker Image ID is $(cat imageid.txt)"
   - |-
-    curl -X PATCH https://api.heroku.com/apps/cbarato/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer ${HEROKU_PRODUCTION_API_KEY}" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
+    curl -X PATCH https://api.heroku.com/apps/wacbaratomk/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer ${HEROKU_PRODUCTION_API_KEY}" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
 
 # image: microsoft/dotnet:2.2
 # stages:
