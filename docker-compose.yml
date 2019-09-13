@@ -2,6 +2,60 @@ version: '3'
 
 services:
 
+  api:
+    image: api
+    container_name: api
+    build:
+     context: .
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80:80"
+    networks:
+      - desafio
+    # depends_on:
+    #   - "mysql"
+
+  mysql: 
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'CbaratoMKDEV'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'cbaratomkDEV'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'M1nhaS&nha!'
+      MYSQL_ROOT_PASSWORD: 'M1nhaS&nha!'
+    volumes:
+      - ./Data/mysql/:/var/lib/mysql
+    networks:
+      - desafio
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - desafio
+
+networks:
+  desafio:
+    driver: bridge
+  # mensageria:
+  #     driver: bridge
+
+  # redis:
+  #   image: redis
+  #   container_name: redis
+  #   command: redis-server --requirepass Redis2019!
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - ./Data/redis/:/data
+
   # sqlserve: 
   #   image: microsoft/mssql-server-linux:2017-latest
   #   container_name: sqlserver
@@ -14,26 +68,10 @@ services:
   #     SA_PASSWORD: M1nhaS&nha!
   #   volumes:
   #     - ./Data/sqlserve/:/var/opt/mssql
-
-  mysql: 
-    image: mysql:5.7
-    container_name: mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - desafio
-    environment:
-      MYSQL_DATABASE: 'CbaratoMKDEV'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'cbaratomkDEV'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'M1nhaS&nha!'
-      MYSQL_ROOT_PASSWORD: 'M1nhaS&nha!'
-    volumes:
-      - ./Data/mysql/:/var/lib/mysql
       
   # broker-local:
   #   image: rabbitmq:3-management-alpine
+  #   container_name: rabbitmq
   #   ports:
   #     - "5672:5672"
   #     - "15672:15672"
@@ -42,9 +80,3 @@ services:
   #   environment:
   #     RABBITMQ_DEFAULT_USER: "testes"
   #     RABBITMQ_DEFAULT_PASS: "RabbitMQ2019!"
-
-networks:
-  desafio:
-    driver: bridge
-  # mensageria:
-  #     driver: bridge
