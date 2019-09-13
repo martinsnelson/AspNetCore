@@ -1,4 +1,5 @@
-image: microsoft/dotnet:2.2
+image: docker:latest
+# image: microsoft/dotnet:2.2
 
 stages:
     - build

@@ -1,7 +1,3 @@
-#   ANGULAR
-ng serve --open
-
-
 #   EF
 add package: Microsoft.EntityFrameworkCore.Tools.DotNet
 dotnet ef migrations add Inicial
@@ -36,3 +32,32 @@ https://rogerdudler.github.io/git-guide/index.pt_BR.html
     "SQLConnection": "Server=.;Database=CbaratoMK;Trusted_Connection=True;User Id=cbaratomk;Password=M1nhaS&nha!;Integrated Security=false;MultipleActiveResultSets=true"
     // "SQLConnection": "Server=.;Database=DesafioCCAA;Trusted_Connection=True;User Id=sa;Password=M1nhaS&nha!;Integrated Security=false;MultipleActiveResultSets=true"
   }
+
+
+GITLAB
+Git global setup
+git config --global user.name "Nelson Martins"
+git config --global user.email "nelsontecti@gmail.com"
+
+Create a new repository
+git clone https://gitlab.com/martinsnelson/wacbaratomk.git
+cd wacbaratomk
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+Push an existing folder
+cd existing_folder
+git init
+git remote add origin https://gitlab.com/martinsnelson/wacbaratomk.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+Push an existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin https://gitlab.com/martinsnelson/wacbaratomk.git
+git push -u origin --all
+git push -u origin --tags
