@@ -1,24 +1,39 @@
 image: docker:latest
-# image: microsoft/dotnet:2.2
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
 
 stages:
-    - build
-    - test
-    
-variables:
-    test: "AspNetCore.Test"
-    
-before_script:
-    # - "cd src"
-    - "dotnet restore"
+  - build
+  
+docker-build:
+  stage: build
+  script:
+  - docker build -f Dockerfile --iidfile imageid.txt -t registry.heroku.com/cbarato/web .
+  - docker login -u _ -p $HEROKU_PRODUCTION_API_KEY registry.heroku.com
+  - docker push registry.heroku.com/cbarato/web
+  - apk add --no-cache curl
+  - echo "Docker Image ID is $(cat imageid.txt)"
+  - |-
+    curl -X PATCH https://api.heroku.com/apps/cbarato/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer ${HEROKU_PRODUCTION_API_KEY}" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
 
-build:
-    stage: build
-    script:
-        - "dotnet build"
-
-test:
-    stage: test
-    script: 
-        - "cd $test"
-        - "dotnet test"
+# image: microsoft/dotnet:2.2
+# stages:
+#     - build
+#     - test    
+# variables:
+#     test: "AspNetCore.Test"    
+# before_script:
+#     # - "cd src"
+#     - "dotnet restore"
+# build:
+#     stage: build
+#     script:
+#         - "dotnet build"
+# test:
+#     stage: test
+#     script: 
+#         - "cd $test"
+#         - "dotnet test"
