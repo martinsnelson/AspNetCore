@@ -2,19 +2,19 @@ version: '3'
 
 services:
 
-  sqlserve: 
-    image: microsoft/mssql-server-linux:2017-latest
-    container_name: sqlserver
-    ports:
-      - "1433:1433"
-    networks:
-      - desafio
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: M1nhaS&nha!
-    volumes:
-      - ./volumes/sqlserve/:/var/opt/mssql
-      
+  # sqlserve: 
+  #   image: microsoft/mssql-server-linux:2017-latest
+  #   container_name: sqlserver
+  #   ports:
+  #     - "1433:1433"
+  #   networks:
+  #     - desafio
+  #   environment:
+  #     ACCEPT_EULA: Y
+  #     SA_PASSWORD: M1nhaS&nha!
+  #   volumes:
+  #     - ./Data/sqlserve/:/var/opt/mssql
+
   mysql: 
     image: mysql:5.7
     container_name: mysql
@@ -30,7 +30,7 @@ services:
       MYSQL_PASSWORD: 'M1nhaS&nha!'
       MYSQL_ROOT_PASSWORD: 'M1nhaS&nha!'
     volumes:
-      - ./volumes/mysql/:/var/lib/mysql
+      - ./Data/mysql/:/var/lib/mysql
       
   # broker-local:
   #   image: rabbitmq:3-management-alpine
