@@ -18,6 +18,5 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
 WORKDIR /app
 
 COPY --from=build-env /app/out .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet
 ENTRYPOINT ["dotnet", "AspNetCore.dll"]
-
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' && nginx -g 'daemon off;'
