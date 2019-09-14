@@ -1,4 +1,5 @@
-FROM microsoft/dotnet:2.2-sdk
+FROM microsoft/dotnet:2.2-sdk-alpine
+# FROM microsoft/dotnet:2.2-sdk
 WORKDIR /app
 EXPOSE 80
 
@@ -8,6 +9,7 @@ RUN dotnet restore
 COPY ./AspNetCore/ ./
 RUN dotnet publish -c release -o out
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet out/AspNetCore.dll
+
 # FROM microsoft/dotnet:2.2-sdk-alpine AS build-env
 # WORKDIR /app
 # EXPOSE 80
