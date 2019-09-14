@@ -23,4 +23,4 @@ COPY --from=build-env /app/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet out/AspNetCore.dll
 # CMD ASPNETCORE_URLS=http://*:$PORT dotnet
 
-ENTRYPOINT ["dotnet", "AspNetCore.dll"]
+# ENTRYPOINT ["dotnet", "AspNetCore.dll"]
