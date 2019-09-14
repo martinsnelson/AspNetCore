@@ -19,3 +19,5 @@ WORKDIR /app
 
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "AspNetCore.dll"]
+
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' && nginx -g 'daemon off;'
