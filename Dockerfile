@@ -2,7 +2,7 @@ FROM microsoft/dotnet:2.2-sdk
 WORKDIR /app
 EXPOSE 80
 
-COPY *.csproj ./
+COPY ./AspNetCore/ *.csproj ./
 RUN dotnet restore
 
 COPY . ./
