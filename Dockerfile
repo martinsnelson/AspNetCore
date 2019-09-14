@@ -5,8 +5,8 @@ EXPOSE 80
 COPY ./AspNetCore/ *.csproj ./
 RUN dotnet restore
 
-COPY . ./
-RUN dotnet publish -c Release -o out
+COPY ./AspNetCore/ ./
+RUN dotnet publish -c release -o out
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet out/wacbaratomk.dll
 # FROM microsoft/dotnet:2.2-sdk-alpine AS build-env
 # WORKDIR /app
