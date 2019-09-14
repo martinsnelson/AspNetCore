@@ -19,4 +19,5 @@ WORKDIR /app
 
 COPY --from=build-env /app/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet
+
 ENTRYPOINT ["dotnet", "AspNetCore.dll"]
