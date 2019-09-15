@@ -17,7 +17,7 @@ RUN dotnet publish -c release -o out
 FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
 WORKDIR /app
 EXPOSE 80
-COPY --from=build-env /app/out .
+COPY --from=build-env /app/out /app
 
 #   Define um comando a ser executado quando um container baseado nessa imagem for iniciado, esse parâmetro pode ser sobrescrito caso o container seja iniciado utilizando alguma informação de comando, como: docker run -d imagem comando, neste caso o CMD da imagem será sobrescrito pelo comando informado;
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet out/AspNetCore.dll
