@@ -1,5 +1,5 @@
 #   Informa a partir de qual imagem será gerada a nova imagem
-FROM microsoft/dotnet:2.2-sdk-alpine
+FROM microsoft/dotnet:2.2-sdk-alpine AS build-env
 #   Define qual será o diretório de trabalho (lugar onde serão copiados os arquivos, e criadas novas pastas);
 WORKDIR /app
 #   Expõem uma ou mais portas, isso quer dizer que o container quando iniciado poderá ser acessível através dessas portas;
